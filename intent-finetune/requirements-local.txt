@@ -1,0 +1,14 @@
+# 本地部署 Qwen 路由模型 + 测评（不要装进 langchain12）
+# 使用已有 CUDA 环境 RWKV7：
+#   C:\Users\admin\anaconda3\envs\RWKV7\python.exe -m pip install -r requirements-local.txt
+#
+# LLaMA-Factory（SFT/DPO）：不要让 pip 重装 torch。
+#   python -m pip install llamafactory --no-deps
+#   python -m pip install transformers==5.6.0 peft==0.18.1 trl==0.24.0 datasets==4.0.0
+transformers>=4.44.0,<=5.6.0
+accelerate>=0.33.0
+modelscope
+pyyaml
+pydantic>=2
+fastapi
+httpx

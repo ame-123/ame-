@@ -1,0 +1,51 @@
+### 路由 DPO：接在 ctx SFT LoRA 之后（本机 4070 能跑，会较慢）
+###   C:\Users\admin\anaconda3\envs\RWKV7\python.exe -m llamafactory.cli train train/dpo_qwen25_3b.yaml
+### 不要全参微调；继续训同一套 LoRA，保留原模型的上下文能力。
+
+model_name_or_path: C:/Users/admin/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1
+adapter_name_or_path: outputs/sft-qwen25-3b-ctx-lora
+trust_remote_code: true
+stage: dpo
+do_train: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 16
+lora_alpha: 32
+pref_beta: 0.1
+
+dataset_dir: data
+dataset: router_dpo
+template: qwen
+cutoff_len: 2048
+max_samples: 2000
+overwrite_cache: true
+preprocessing_num_workers: 1
+dataloader_num_workers: 0
+
+output_dir: outputs/dpo-qwen25-3b-ctx-lora
+logging_steps: 5
+save_steps: 50
+save_total_limit: 2
+plot_loss: true
+overwrite_output_dir: true
+report_to: none
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16
+gradient_checkpointing: true
+learning_rate: 5.0e-6
+num_train_epochs: 1
+lr_scheduler_type: cosine
+warmup_steps: 5
+bf16: true
+flash_attn: disabled
+optim: adamw_torch
+
+do_eval: true
+val_size: 0.0
+eval_dataset: router_dpo_val
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 50
+
+ddp_timeout: 180000000

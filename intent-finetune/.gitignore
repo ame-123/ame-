@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+outputs/eval_reports/*.json
+outputs/eval_reports/*.md
+outputs/eval_cache/

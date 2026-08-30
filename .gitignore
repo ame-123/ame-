@@ -1,0 +1,39 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+course.env
+*.pem
+*.key
+
+# Local data / weights
+outputs/
+_cloud_pack/
+chat_logs/
+rag/knowledge/chunks/
+*.db
+*.sqlite
+*.zip
+*.pt
+*.bin
+*.safetensors
+*.gguf
+*.ggml
+adapter_model.*
+pytorch_model.*
+
+# Full training / eval corpora — generate locally, do not publish
+intent-finetune/data/*.jsonl
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

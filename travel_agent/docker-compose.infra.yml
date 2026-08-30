@@ -1,0 +1,11 @@
+services:
+  chroma:
+    image: chromadb/chroma:1.0.8
+    container_name: demo-chroma
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+
+volumes:
+  chroma-data:

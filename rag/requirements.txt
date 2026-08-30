@@ -1,0 +1,12 @@
+python-dotenv
+pymilvus
+langchain-openai
+langchain-deepseek
+langchain-text-splitters
+pypdf
+pymupdf
+python-docx
+charset-normalizer
+streamlit
+rapidocr
+onnxruntime

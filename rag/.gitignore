@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+knowledge/uploads/*
+!knowledge/uploads/.gitkeep
+!knowledge/uploads/sample.md
+knowledge/chunks/*
+!knowledge/chunks/.gitkeep

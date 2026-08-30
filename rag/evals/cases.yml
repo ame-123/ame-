@@ -1,0 +1,1230 @@
+# 针对课程「未优化问法」的召回 gold（200 条）。
+# 对照第 13 课口语归一、第 15 课售后长尾/场景限制、第 41 课 Hybrid 关键词。
+# 电商原场景 → 出行映射：耳麦/耳机→套餐；春季音频节/旧618→早鸟 vs 往年618；
+# 300减40→满6000减400；未发货→未出行；开票→电子发票；少一根/盒子/压了→还没走/无理由等口语。
+# 正规完整问句尽量不收，那些纯向量已经会。
+k_default: 4
+cases:
+  # --- 1. 口语别名：叠券/能叠吗/会员券/促销/退钱 ---
+  - case_id: colloq-01
+    gap: colloquial
+    query: 能叠吗
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: colloq-02
+    gap: colloquial
+    query: 叠券怎么算
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: colloq-03
+    gap: colloquial
+    query: 早鸟能叠会员券吗
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["出行券"]
+    hard_for: [vector_only]
+  - case_id: colloq-04
+    gap: colloquial
+    query: 金卡会员券和满减能一起用吗
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: colloq-05
+    gap: colloquial
+    query: 现在促销还能叠吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: colloq-06
+    gap: colloquial
+    query: 这波促销有会员价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["会员价"]
+    hard_for: [vector_only]
+  - case_id: colloq-07
+    gap: colloquial
+    query: 直接退钱
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: colloq-08
+    gap: colloquial
+    query: 把钱打回来
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["退票"]
+    hard_for: [vector_only]
+  - case_id: colloq-09
+    gap: colloquial
+    query: 给我退钱现在就要
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["不能"]
+    hard_for: [vector_only]
+  - case_id: colloq-10
+    gap: colloquial
+    query: 开票
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: colloq-11
+    gap: colloquial
+    query: 啥时候能开票
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["24 小时"]
+    hard_for: [vector_only]
+  - case_id: colloq-12
+    gap: colloquial
+    query: 行程开票在哪下
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: colloq-13
+    gap: colloquial
+    query: 优惠卷过期了补不补
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["过期"]
+    hard_for: [vector_only]
+  - case_id: colloq-14
+    gap: colloquial
+    query: 出行券能给别人用吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["不能转让"]
+    hard_for: [vector_only]
+  - case_id: colloq-15
+    gap: colloquial
+    query: 满减和出行券能叠不
+    expected_sources: [promotion_policy.md]
+    must_contain: ["满 6000 减 400"]
+    hard_for: [vector_only]
+  - case_id: colloq-16
+    gap: colloquial
+    query: 东京套餐现在促销价多少规则
+    expected_sources: [promotion_policy.md]
+    must_contain: ["东京"]
+    hard_for: [vector_only]
+  - case_id: colloq-17
+    gap: colloquial
+    query: 还没走退钱行不行
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未出行"]
+    hard_for: [vector_only]
+  - case_id: colloq-18
+    gap: colloquial
+    query: 没出发就把钱退了
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未出行"]
+    hard_for: [vector_only]
+  - case_id: colloq-19
+    gap: colloquial
+    query: 专票怎么开
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["专用发票"]
+    hard_for: [vector_only]
+  - case_id: colloq-20
+    gap: colloquial
+    query: 积分抵现怎么算
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["100 积分抵 1 元"]
+    hard_for: [vector_only]
+  - case_id: colloq-21
+    gap: colloquial
+    query: 生日券啥时候发
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["生日"]
+    hard_for: [vector_only]
+  - case_id: colloq-22
+    gap: colloquial
+    query: 价保怎么搞
+    expected_sources: [promotion_policy.md]
+    must_contain: ["价格保护"]
+    hard_for: [vector_only]
+
+  # --- 2. 指代噪声：那个/这个/那款/这款 ---
+  - case_id: deixis-01
+    gap: deixis
+    query: 那个早鸟满减还能用吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["早鸟"]
+    hard_for: [vector_only]
+  - case_id: deixis-02
+    gap: deixis
+    query: 这个促销能叠券吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: deixis-03
+    gap: deixis
+    query: 这款东京套餐有会员价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["会员价"]
+    hard_for: [vector_only]
+  - case_id: deixis-04
+    gap: deixis
+    query: 那款机票酒店还能退钱吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["退票"]
+    hard_for: [vector_only]
+  - case_id: deixis-05
+    gap: deixis
+    query: 那个券过期了怎么办
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["过期"]
+    hard_for: [vector_only]
+  - case_id: deixis-06
+    gap: deixis
+    query: 这个发票啥时候能开
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: deixis-07
+    gap: deixis
+    query: 那款活动价以哪里为准
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: deixis-08
+    gap: deixis
+    query: 这个退钱一定到账吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: deixis-09
+    gap: deixis
+    query: 那款金卡出行券能转给别人吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["不能转让"]
+    hard_for: [vector_only]
+  - case_id: deixis-10
+    gap: deixis
+    query: 这款套餐客服能改价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能手工改价"]
+    hard_for: [vector_only]
+  - case_id: deixis-11
+    gap: deixis
+    query: 那个七天无理由现在还能退吗
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不走未出行退票"]
+    hard_for: [vector_only]
+  - case_id: deixis-12
+    gap: deixis
+    query: 这个加购没位了能锁吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["加购"]
+    hard_for: [vector_only]
+
+  # --- 3. 省略短问：课程「能叠吗」一类 ---
+  - case_id: short-01
+    gap: ellipsis
+    query: 能退吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["退票"]
+    hard_for: [vector_only]
+  - case_id: short-02
+    gap: ellipsis
+    query: 能开票吗
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: short-03
+    gap: ellipsis
+    query: 有会员价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["会员价"]
+    hard_for: [vector_only]
+  - case_id: short-04
+    gap: ellipsis
+    query: 以谁为准
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: short-05
+    gap: ellipsis
+    query: 补券吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["补发"]
+    hard_for: [vector_only]
+  - case_id: short-06
+    gap: ellipsis
+    query: 要审批吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: short-07
+    gap: ellipsis
+    query: 秒杀锁价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["心愿单"]
+    hard_for: [vector_only]
+  - case_id: short-08
+    gap: ellipsis
+    query: 价保几天
+    expected_sources: [promotion_policy.md]
+    must_contain: ["7 天"]
+    hard_for: [vector_only]
+  - case_id: short-09
+    gap: ellipsis
+    query: 积分过期吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["积分"]
+    hard_for: [vector_only]
+  - case_id: short-10
+    gap: ellipsis
+    query: 转人工吗
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["升级"]
+    hard_for: [vector_only]
+  - case_id: short-11
+    gap: ellipsis
+    query: 到账了吗
+    expected_sources: [after_sale_policy.md, payment_invoice_policy.md]
+    must_contain: ["到账"]
+    hard_for: [vector_only]
+  - case_id: short-12
+    gap: ellipsis
+    query: 能改价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能手工改价"]
+    hard_for: [vector_only]
+
+  # --- 4. 旧活动抢第一名：618/双11 vs 当前早鸟 ---
+  - case_id: old-01
+    gap: old_campaign
+    query: 618还能叠满减吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["只用于运营复盘"]
+    hard_for: [vector_only]
+  - case_id: old-02
+    gap: old_campaign
+    query: 双11会员价再叠一张券行不行
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不代表当前"]
+    hard_for: [vector_only]
+  - case_id: old-03
+    gap: old_campaign
+    query: 往年大促那样叠券现在还能吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["出行早鸟"]
+    hard_for: [vector_only]
+  - case_id: old-04
+    gap: old_campaign
+    query: 现在是618规则还是早鸟
+    expected_sources: [promotion_policy.md]
+    must_contain: ["出行早鸟"]
+    hard_for: [vector_only]
+  - case_id: old-05
+    gap: old_campaign
+    query: 历史活动那套满减还能用吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["复盘"]
+    hard_for: [vector_only]
+  - case_id: old-06
+    gap: old_campaign
+    query: 当前活动满减是多少
+    expected_sources: [promotion_policy.md]
+    must_contain: ["满 6000 减 400"]
+    hard_for: [vector_only]
+  - case_id: old-07
+    gap: old_campaign
+    query: 校园季折扣现在能答应吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能提前承诺"]
+    hard_for: [vector_only]
+  - case_id: old-08
+    gap: old_campaign
+    query: 即将上线的学生优惠能先说金额吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["未上线"]
+    hard_for: [vector_only]
+  - case_id: old-09
+    gap: old_campaign
+    query: 以前618那样会员价加满减现在有吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["只用于运营复盘"]
+    hard_for: [vector_only]
+  - case_id: old-10
+    gap: old_campaign
+    query: 现在早鸟和旧大促哪套算数
+    expected_sources: [promotion_policy.md]
+    must_contain: ["当前"]
+    hard_for: [vector_only]
+  - case_id: old-11
+    gap: old_campaign
+    query: 过期大促规则能不能套到这单
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能把历史"]
+    hard_for: [vector_only]
+  - case_id: old-12
+    gap: old_campaign
+    query: 2026早鸟活动时间是哪段
+    expected_sources: [promotion_policy.md]
+    must_contain: ["2026-03-01"]
+    hard_for: [vector_only]
+
+  # --- 5. 错字近音：优惠卷/退款/开票 ---
+  - case_id: typo-01
+    gap: typo
+    query: 优惠卷能叠吗
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: typo-02
+    gap: typo
+    query: 出行卷过期补发吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["过期"]
+    hard_for: [vector_only]
+  - case_id: typo-03
+    gap: typo
+    query: 满六千减四百还在吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["6000"]
+    hard_for: [vector_only]
+  - case_id: typo-04
+    gap: typo
+    query: 电子发飘24小时有吗
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["24 小时"]
+    hard_for: [vector_only]
+  - case_id: typo-05
+    gap: typo
+    query: 未出行退嫖要审批吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: typo-06
+    gap: typo
+    query: 结算业为准吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: typo-07
+    gap: typo
+    query: 金卡出行券本人用吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["本人"]
+    hard_for: [vector_only]
+  - case_id: typo-08
+    gap: typo
+    query: 微信退歀几天
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["1 到 3"]
+    hard_for: [vector_only]
+
+  # --- 6. 稀有精确词：课程 keyword 路（结算页/无理由/出行券/早鸟） ---
+  - case_id: rare-01
+    gap: rare_term
+    query: 以结算页为准是什么意思
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: rare-02
+    gap: rare_term
+    query: 满 6000 减 400 能叠出行券吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["出行券"]
+    hard_for: [vector_only]
+  - case_id: rare-03
+    gap: rare_term
+    query: 七天无理由已出行能走吗
+    expected_sources: [received_return_policy.md]
+    must_contain: ["无理由"]
+    hard_for: [vector_only]
+  - case_id: rare-04
+    gap: rare_term
+    query: 早鸟活动价还能再叠满减券吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["同类型满减券"]
+    hard_for: [vector_only]
+  - case_id: rare-05
+    gap: rare_term
+    query: 出行券过期补发吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["不支持补发"]
+    hard_for: [vector_only]
+  - case_id: rare-06
+    gap: rare_term
+    query: 会员价和同类型满减券
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["同类型"]
+    hard_for: [vector_only]
+  - case_id: rare-07
+    gap: rare_term
+    query: 未出行未值机才能退票吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未值机"]
+    hard_for: [vector_only]
+  - case_id: rare-08
+    gap: rare_term
+    query: 人工审批之前能说已到账吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["已经到账"]
+    hard_for: [vector_only]
+  - case_id: rare-09
+    gap: rare_term
+    query: 心愿单算锁定秒杀价吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["心愿单"]
+    hard_for: [vector_only]
+  - case_id: rare-10
+    gap: rare_term
+    query: 价保包不包含限时秒杀吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不纳入价保"]
+    hard_for: [vector_only]
+  - case_id: rare-11
+    gap: rare_term
+    query: 20元券补偿上限
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["20 元"]
+    hard_for: [vector_only]
+  - case_id: rare-12
+    gap: rare_term
+    query: 100积分抵1元
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["100 积分抵 1 元"]
+    hard_for: [vector_only]
+
+  # --- 7. 售后口语长尾：还没走 / 无理由 / 口述替代事实 ---
+  - case_id: oral-01
+    gap: after_sale_oral
+    query: 还没走能不能退
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["不能直接视为未出行"]
+    hard_for: [vector_only]
+  - case_id: oral-02
+    gap: after_sale_oral
+    query: 我都说还没出发了直接退
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["口述"]
+    hard_for: [vector_only]
+  - case_id: oral-03
+    gap: after_sale_oral
+    query: 已经走了要七天无理由
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不走未出行退票"]
+    hard_for: [vector_only]
+  - case_id: oral-04
+    gap: after_sale_oral
+    query: 值机了还按没走退
+    expected_sources: [after_sale_policy.md, received_return_policy.md]
+    must_contain: ["已值机"]
+    hard_for: [vector_only]
+  - case_id: oral-05
+    gap: after_sale_oral
+    query: 不用审批直接到账
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: oral-06
+    gap: after_sale_oral
+    query: 拦截航班立刻作废
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["拦截"]
+    hard_for: [vector_only]
+  - case_id: oral-07
+    gap: after_sale_oral
+    query: 酒店住不了算质量问题直接赔
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不能直接承诺"]
+    hard_for: [vector_only]
+  - case_id: oral-08
+    gap: after_sale_oral
+    query: 自己退改了手续费谁出
+    expected_sources: [received_return_policy.md]
+    must_contain: ["手续费"]
+    hard_for: [vector_only]
+  - case_id: oral-09
+    gap: after_sale_oral
+    query: 线下自己退了还能原路退吗
+    expected_sources: [received_return_policy.md]
+    must_contain: ["自行"]
+    hard_for: [vector_only]
+  - case_id: oral-10
+    gap: after_sale_oral
+    query: 团队票只改一段行不行
+    expected_sources: [received_return_policy.md]
+    must_contain: ["整单退改"]
+    hard_for: [vector_only]
+  - case_id: oral-11
+    gap: after_sale_oral
+    query: 间夜核销完了当没走退
+    expected_sources: [received_return_policy.md]
+    must_contain: ["已核销"]
+    hard_for: [vector_only]
+  - case_id: oral-12
+    gap: after_sale_oral
+    query: resume过了是不是已经退成功
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["不执行真实退票"]
+    hard_for: [vector_only]
+
+  # --- 8. 场景串台：促销口语落到售后 / 行程词落到投诉 ---
+  - case_id: mix-01
+    gap: scene_mix
+    query: 这款促销退钱吗
+    expected_sources: [after_sale_policy.md, promotion_policy.md]
+    must_contain: ["退票"]
+    hard_for: [vector_only]
+  - case_id: mix-02
+    gap: scene_mix
+    query: 早鸟套餐还能退吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未出行"]
+    hard_for: [vector_only]
+  - case_id: mix-03
+    gap: scene_mix
+    query: 会员价退了积分还回吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["积分"]
+    hard_for: [vector_only]
+  - case_id: mix-04
+    gap: scene_mix
+    query: 开票和退钱哪个先
+    expected_sources: [payment_invoice_policy.md, after_sale_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: mix-05
+    gap: scene_mix
+    query: 315曝光你们促销骗人
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["315"]
+    hard_for: [vector_only]
+  - case_id: mix-06
+    gap: scene_mix
+    query: 帮我查别人那个行程
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["他人行程"]
+    hard_for: [vector_only]
+  - case_id: mix-07
+    gap: scene_mix
+    query: 退一赔三现金赔偿
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["退一赔三"]
+    hard_for: [vector_only]
+  - case_id: mix-08
+    gap: scene_mix
+    query: 聊天里把护照号发我
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["护照"]
+    hard_for: [vector_only]
+  - case_id: mix-09
+    gap: scene_mix
+    query: 加购没了能用现金顶吗
+    expected_sources: [order_service_policy.md]
+    must_contain: ["不能承诺用现金"]
+    hard_for: [vector_only]
+  - case_id: mix-10
+    gap: scene_mix
+    query: 十人团单能先答应折扣吗
+    expected_sources: [order_service_policy.md]
+    must_contain: ["不能直接承诺折扣"]
+    hard_for: [vector_only]
+
+  - case_id: colloq-23
+    gap: colloquial
+    query: 券能叠不
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: colloq-24
+    gap: colloquial
+    query: 金卡那张券咋用
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["出行券"]
+    hard_for: [vector_only]
+  - case_id: colloq-25
+    gap: colloquial
+    query: 现在搞活动吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["早鸟"]
+    hard_for: [vector_only]
+  - case_id: colloq-26
+    gap: colloquial
+    query: 有折扣吗以谁说了算
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: colloq-27
+    gap: colloquial
+    query: 退票打款吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: colloq-28
+    gap: colloquial
+    query: 钱什么时候回来
+    expected_sources: [after_sale_policy.md, payment_invoice_policy.md]
+    must_contain: ["到账"]
+    hard_for: [vector_only]
+  - case_id: colloq-29
+    gap: colloquial
+    query: 发票抬头错了能改不
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["红冲"]
+    hard_for: [vector_only]
+  - case_id: colloq-30
+    gap: colloquial
+    query: 专票要啥材料
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["纳税人识别号"]
+    hard_for: [vector_only]
+  - case_id: colloq-31
+    gap: colloquial
+    query: 忘记用券了补一张呗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["忘记使用"]
+    hard_for: [vector_only]
+  - case_id: colloq-32
+    gap: colloquial
+    query: 积分抵多少
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["100 积分抵 1 元"]
+    hard_for: [vector_only]
+  - case_id: colloq-33
+    gap: colloquial
+    query: 黑金生日那张券几天有效
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["生日月"]
+    hard_for: [vector_only]
+  - case_id: colloq-34
+    gap: colloquial
+    query: 秒杀加购物车算锁定吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["心愿单"]
+    hard_for: [vector_only]
+  - case_id: colloq-35
+    gap: colloquial
+    query: 截图价和结算页不一样听谁的
+    expected_sources: [promotion_policy.md]
+    must_contain: ["截图"]
+    hard_for: [vector_only]
+  - case_id: colloq-36
+    gap: colloquial
+    query: 没付款那单会不会自己关
+    expected_sources: [promotion_policy.md, order_service_policy.md]
+    must_contain: ["30 分钟"]
+    hard_for: [vector_only]
+  - case_id: colloq-37
+    gap: colloquial
+    query: 接送机没位了能给锁一个吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["加购"]
+    hard_for: [vector_only]
+  - case_id: colloq-38
+    gap: colloquial
+    query: 客服帮我改个价
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能手工改价"]
+    hard_for: [vector_only]
+  - case_id: colloq-39
+    gap: colloquial
+    query: 还没值机能退不
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未值机"]
+    hard_for: [vector_only]
+  - case_id: colloq-40
+    gap: colloquial
+    query: 已经登机了还按没走退
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不支持按未出行退票"]
+    hard_for: [vector_only]
+  - case_id: colloq-41
+    gap: colloquial
+    query: 投诉要曝光怎么升
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["严重投诉"]
+    hard_for: [vector_only]
+  - case_id: colloq-42
+    gap: colloquial
+    query: 普通客服能赔现金吗
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["现金赔偿"]
+    hard_for: [vector_only]
+  - case_id: colloq-43
+    gap: colloquial
+    query: 团单十来个人谁接
+    expected_sources: [order_service_policy.md]
+    must_contain: ["10 人"]
+    hard_for: [vector_only]
+  - case_id: colloq-44
+    gap: colloquial
+    query: 拆单了是不是漏订
+    expected_sources: [order_service_policy.md]
+    must_contain: ["不代表漏订"]
+    hard_for: [vector_only]
+
+  - case_id: deixis-13
+    gap: deixis
+    query: 那个满减现在还有吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["满 6000 减 400"]
+    hard_for: [vector_only]
+  - case_id: deixis-14
+    gap: deixis
+    query: 这款套餐能叠出行券吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["出行券"]
+    hard_for: [vector_only]
+  - case_id: deixis-15
+    gap: deixis
+    query: 那个价保怎么申请
+    expected_sources: [promotion_policy.md]
+    must_contain: ["价格保护"]
+    hard_for: [vector_only]
+  - case_id: deixis-16
+    gap: deixis
+    query: 这款秒杀过半小时还能原价秒吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["30 分钟"]
+    hard_for: [vector_only]
+  - case_id: deixis-17
+    gap: deixis
+    query: 那个退票要不要人批
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["人工审批"]
+    hard_for: [vector_only]
+  - case_id: deixis-18
+    gap: deixis
+    query: 这单我说没走就能退吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["不能直接视为未出行"]
+    hard_for: [vector_only]
+  - case_id: deixis-19
+    gap: deixis
+    query: 那张生日券能折现吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["不可折现"]
+    hard_for: [vector_only]
+  - case_id: deixis-20
+    gap: deixis
+    query: 这个积分退票还回来吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["按原路径退回"]
+    hard_for: [vector_only]
+  - case_id: deixis-21
+    gap: deixis
+    query: 那张专票几天能审完
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["1 到 3 个工作日"]
+    hard_for: [vector_only]
+  - case_id: deixis-22
+    gap: deixis
+    query: 这个对公转账多久出票
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["1 到 2 个工作日"]
+    hard_for: [vector_only]
+  - case_id: deixis-23
+    gap: deixis
+    query: 那段确认超时了咋办
+    expected_sources: [order_service_policy.md]
+    must_contain: ["72 小时"]
+    hard_for: [vector_only]
+  - case_id: deixis-24
+    gap: deixis
+    query: 那个团单能答应账期吗
+    expected_sources: [order_service_policy.md]
+    must_contain: ["50000"]
+    hard_for: [vector_only]
+
+  - case_id: short-13
+    gap: ellipsis
+    query: 能叠券不
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: short-14
+    gap: ellipsis
+    query: 早鸟呢
+    expected_sources: [promotion_policy.md]
+    must_contain: ["早鸟"]
+    hard_for: [vector_only]
+  - case_id: short-15
+    gap: ellipsis
+    query: 结算页呢
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: short-16
+    gap: ellipsis
+    query: 未出行吗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["未出行"]
+    hard_for: [vector_only]
+  - case_id: short-17
+    gap: ellipsis
+    query: 要凭证吗
+    expected_sources: [received_return_policy.md]
+    must_contain: ["凭证"]
+    hard_for: [vector_only]
+  - case_id: short-18
+    gap: ellipsis
+    query: 48小时吗
+    expected_sources: [received_return_policy.md]
+    must_contain: ["48 小时"]
+    hard_for: [vector_only]
+  - case_id: short-19
+    gap: ellipsis
+    query: 补发吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["补发"]
+    hard_for: [vector_only]
+  - case_id: short-20
+    gap: ellipsis
+    query: 本人用吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["本人"]
+    hard_for: [vector_only]
+  - case_id: short-21
+    gap: ellipsis
+    query: 电子发票呢
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["电子发票"]
+    hard_for: [vector_only]
+  - case_id: short-22
+    gap: ellipsis
+    query: 原路退吗
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["原支付路径"]
+    hard_for: [vector_only]
+  - case_id: short-23
+    gap: ellipsis
+    query: 拆单吗
+    expected_sources: [order_service_policy.md]
+    must_contain: ["拆单"]
+    hard_for: [vector_only]
+  - case_id: short-24
+    gap: ellipsis
+    query: 升人工吗
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["升级"]
+    hard_for: [vector_only]
+
+  - case_id: old-13
+    gap: old_campaign
+    query: 618满减现在还能用吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["只用于运营复盘"]
+    hard_for: [vector_only]
+  - case_id: old-14
+    gap: old_campaign
+    query: 去年双十一那套叠券规则
+    expected_sources: [promotion_policy.md]
+    must_contain: ["复盘"]
+    hard_for: [vector_only]
+  - case_id: old-15
+    gap: old_campaign
+    query: 旧大促口径套到早鸟上行不行
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能把历史"]
+    hard_for: [vector_only]
+  - case_id: old-16
+    gap: old_campaign
+    query: 当前到底按哪场活动算
+    expected_sources: [promotion_policy.md]
+    must_contain: ["出行早鸟"]
+    hard_for: [vector_only]
+  - case_id: old-17
+    gap: old_campaign
+    query: 历史618记录能当现规则吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不代表当前"]
+    hard_for: [vector_only]
+  - case_id: old-18
+    gap: old_campaign
+    query: 学生优惠现在有金额吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能提前承诺"]
+    hard_for: [vector_only]
+  - case_id: old-19
+    gap: old_campaign
+    query: 预告活动能先锁折扣吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["未上线"]
+    hard_for: [vector_only]
+  - case_id: old-20
+    gap: old_campaign
+    query: 早鸟时间和618是不是同一场
+    expected_sources: [promotion_policy.md]
+    must_contain: ["2026-03-01"]
+    hard_for: [vector_only]
+  - case_id: old-21
+    gap: old_campaign
+    query: 现在满减门槛是六千吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["满 6000 减 400"]
+    hard_for: [vector_only]
+  - case_id: old-22
+    gap: old_campaign
+    query: 过期活动页截图还能用吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: old-23
+    gap: old_campaign
+    query: 往年会员价叠加满减现在有吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["只用于运营复盘"]
+    hard_for: [vector_only]
+  - case_id: old-24
+    gap: old_campaign
+    query: 运营复盘那条能对客承诺吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["复盘"]
+    hard_for: [vector_only]
+
+  - case_id: typo-09
+    gap: typo
+    query: 优彗券能叠吗
+    expected_sources: [promotion_policy.md, member_coupon_policy.md]
+    must_contain: ["叠加"]
+    hard_for: [vector_only]
+  - case_id: typo-10
+    gap: typo
+    query: 出行卷本人用吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["本人"]
+    hard_for: [vector_only]
+  - case_id: typo-11
+    gap: typo
+    query: 满6千减4百
+    expected_sources: [promotion_policy.md]
+    must_contain: ["6000"]
+    hard_for: [vector_only]
+  - case_id: typo-12
+    gap: typo
+    query: 结筊页为准
+    expected_sources: [promotion_policy.md]
+    must_contain: ["结算页"]
+    hard_for: [vector_only]
+  - case_id: typo-13
+    gap: typo
+    query: 未出行退噗
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["退票"]
+    hard_for: [vector_only]
+  - case_id: typo-14
+    gap: typo
+    query: 电子发票24小时
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["24 小时"]
+    hard_for: [vector_only]
+  - case_id: typo-15
+    gap: typo
+    query: 银行卡退歀要一周吗
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["3 到 7"]
+    hard_for: [vector_only]
+  - case_id: typo-16
+    gap: typo
+    query: 金卡出行劵过期
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["过期"]
+    hard_for: [vector_only]
+
+  - case_id: rare-13
+    gap: rare_term
+    query: 结算页没展示的券能手工加吗
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["不能承诺手工"]
+    hard_for: [vector_only]
+  - case_id: rare-14
+    gap: rare_term
+    query: 同类型满减券重复叠加吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["不能与同类型满减券"]
+    hard_for: [vector_only]
+  - case_id: rare-15
+    gap: rare_term
+    query: 出行早鸟活动到3月31吗
+    expected_sources: [promotion_policy.md]
+    must_contain: ["2026-03-31"]
+    hard_for: [vector_only]
+  - case_id: rare-16
+    gap: rare_term
+    query: 已提交待审批能不能说已到账
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["已提交待审批"]
+    hard_for: [vector_only]
+  - case_id: rare-17
+    gap: rare_term
+    query: 行程结束后7天内退改
+    expected_sources: [received_return_policy.md]
+    must_contain: ["7 天内"]
+    hard_for: [vector_only]
+  - case_id: rare-18
+    gap: rare_term
+    query: 资料齐全后48小时审核
+    expected_sources: [received_return_policy.md]
+    must_contain: ["48 小时"]
+    hard_for: [vector_only]
+  - case_id: rare-19
+    gap: rare_term
+    query: 积分有效期到次年12月31日
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["12 月 31 日"]
+    hard_for: [vector_only]
+  - case_id: rare-20
+    gap: rare_term
+    query: 会员等级每天02:00重算
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["02:00"]
+    hard_for: [vector_only]
+  - case_id: rare-21
+    gap: rare_term
+    query: 低额补偿上限20元券
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["20 元"]
+    hard_for: [vector_only]
+  - case_id: rare-22
+    gap: rare_term
+    query: 手机号后4位核对身份
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["后 4 位"]
+    hard_for: [vector_only]
+  - case_id: rare-23
+    gap: rare_term
+    query: 单笔超过50000转大客户
+    expected_sources: [order_service_policy.md]
+    must_contain: ["50000"]
+    hard_for: [vector_only]
+  - case_id: rare-24
+    gap: rare_term
+    query: 待支付30分钟自动关闭
+    expected_sources: [order_service_policy.md]
+    must_contain: ["30 分钟"]
+    hard_for: [vector_only]
+
+  - case_id: oral-13
+    gap: after_sale_oral
+    query: 我口头说没走你们就退
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["口述"]
+    hard_for: [vector_only]
+  - case_id: oral-14
+    gap: after_sale_oral
+    query: 走了也要按没出发退
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不走未出行退票"]
+    hard_for: [vector_only]
+  - case_id: oral-15
+    gap: after_sale_oral
+    query: 酒店间夜用掉了当没住
+    expected_sources: [received_return_policy.md]
+    must_contain: ["已核销"]
+    hard_for: [vector_only]
+  - case_id: oral-16
+    gap: after_sale_oral
+    query: 自己改期了手续费你们出
+    expected_sources: [received_return_policy.md]
+    must_contain: ["用户自身原因"]
+    hard_for: [vector_only]
+  - case_id: oral-17
+    gap: after_sale_oral
+    query: 取消险赔多少你先定
+    expected_sources: [received_return_policy.md]
+    must_contain: ["取消险"]
+    hard_for: [vector_only]
+  - case_id: oral-18
+    gap: after_sale_oral
+    query: 联程只退后半段
+    expected_sources: [received_return_policy.md]
+    must_contain: ["整单退改"]
+    hard_for: [vector_only]
+  - case_id: oral-19
+    gap: after_sale_oral
+    query: 人批过了就是钱到了
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["不执行真实退票"]
+    hard_for: [vector_only]
+  - case_id: oral-20
+    gap: after_sale_oral
+    query: 精确告诉我几点到账
+    expected_sources: [after_sale_policy.md, payment_invoice_policy.md]
+    must_contain: ["不能承诺"]
+    hard_for: [vector_only]
+  - case_id: oral-21
+    gap: after_sale_oral
+    query: 没订单号也先退
+    expected_sources: [after_sale_policy.md]
+    must_contain: ["行程单"]
+    hard_for: [vector_only]
+  - case_id: oral-22
+    gap: after_sale_oral
+    query: 质量问题你们先赔三千
+    expected_sources: [received_return_policy.md]
+    must_contain: ["不能直接承诺"]
+    hard_for: [vector_only]
+  - case_id: oral-23
+    gap: after_sale_oral
+    query: 线下退了系统也要原路退
+    expected_sources: [received_return_policy.md]
+    must_contain: ["自行"]
+    hard_for: [vector_only]
+  - case_id: oral-24
+    gap: after_sale_oral
+    query: 已出行退改是不是已经成功
+    expected_sources: [received_return_policy.md]
+    must_contain: ["还不是退改成功"]
+    hard_for: [vector_only]
+
+  - case_id: mix-11
+    gap: scene_mix
+    query: 促销发票怎么开
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]
+  - case_id: mix-12
+    gap: scene_mix
+    query: 早鸟退了积分回不回
+    expected_sources: [member_coupon_policy.md]
+    must_contain: ["积分"]
+    hard_for: [vector_only]
+  - case_id: mix-13
+    gap: scene_mix
+    query: 会员价那单要开专票
+    expected_sources: [payment_invoice_policy.md]
+    must_contain: ["专用发票"]
+    hard_for: [vector_only]
+  - case_id: mix-14
+    gap: scene_mix
+    query: 行程进度和退钱一起问
+    expected_sources: [order_service_policy.md, after_sale_policy.md]
+    must_contain: ["行程"]
+    hard_for: [vector_only]
+  - case_id: mix-15
+    gap: scene_mix
+    query: 监管投诉还要退一赔三
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["监管"]
+    hard_for: [vector_only]
+  - case_id: mix-16
+    gap: scene_mix
+    query: 查一下别人手机号行程
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["他人行程"]
+    hard_for: [vector_only]
+  - case_id: mix-17
+    gap: scene_mix
+    query: 促销骗人要315
+    expected_sources: [complaint_escalation_policy.md]
+    must_contain: ["315"]
+    hard_for: [vector_only]
+  - case_id: mix-18
+    gap: scene_mix
+    query: 加购保险退主套餐怎么算
+    expected_sources: [order_service_policy.md]
+    must_contain: ["一并取消"]
+    hard_for: [vector_only]
+  - case_id: mix-19
+    gap: scene_mix
+    query: 对公团单先答应折扣
+    expected_sources: [order_service_policy.md]
+    must_contain: ["不能直接承诺折扣"]
+    hard_for: [vector_only]
+  - case_id: mix-20
+    gap: scene_mix
+    query: 开票失败是不是已经退款成功
+    expected_sources: [payment_invoice_policy.md, after_sale_policy.md]
+    must_contain: ["发票"]
+    hard_for: [vector_only]

@@ -1,0 +1,13 @@
+### 本地 OpenAI 兼容路由服务（RWKV7，不要在 langchain12 里跑）
+### cd intent-finetune 后：
+###   C:\Users\admin\anaconda3\envs\RWKV7\python.exe -m llamafactory.cli api train/api_qwen25_3b.yaml
+### Agent 侧：
+###   AGENT_CLASSIFIER_BASE_URL=http://127.0.0.1:8000/v1
+###   AGENT_CLASSIFIER_API_KEY=local
+###   AGENT_CLASSIFIER_MODEL=Qwen/Qwen2.5-3B-Instruct
+
+model_name_or_path: C:/Users/admin/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1
+adapter_name_or_path: outputs/sft-qwen25-3b-ctx-lora
+template: qwen
+infer_backend: huggingface
+trust_remote_code: true

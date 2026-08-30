@@ -1,0 +1,50 @@
+### 云端 RTX 4090 路由 SFT（不要在本机 4070 上跑这份）
+### 实例里：
+###   export USE_MODELSCOPE_HUB=1
+###   llamafactory-cli train train/sft_qwen25_3b_4090.yaml
+
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+trust_remote_code: true
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 16
+lora_alpha: 32
+
+dataset_dir: data
+dataset: router_sft
+template: qwen
+cutoff_len: 2048
+max_samples: 2000
+overwrite_cache: true
+preprocessing_num_workers: 4
+dataloader_num_workers: 2
+
+output_dir: outputs/sft-qwen25-3b-ctx-lora
+logging_steps: 5
+save_steps: 50
+save_total_limit: 2
+plot_loss: true
+overwrite_output_dir: true
+report_to: none
+
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+gradient_checkpointing: true
+learning_rate: 2.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_steps: 5
+bf16: true
+flash_attn: fa2
+optim: adamw_torch
+
+do_eval: true
+val_size: 0.0
+eval_dataset: router_sft_val
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 50
+
+ddp_timeout: 180000000
